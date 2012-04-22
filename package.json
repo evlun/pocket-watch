@@ -1,0 +1,19 @@
+{
+  "name": "pocket-watch",
+  "author": "Erik Lundin",
+  "description": "Tiny benchmarking library",
+  "keywords": ["benchmark", "time", "test"],
+  "version": "0.0.1",
+  "homepage": "http://github.com/mjor/pocket-watch",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mjor/pocket-watch.git"
+  },
+  "main": "pocket-watch.js",
+  "engines": {
+    "node": ">=0.6.0"
+  },
+  "licenses": [{
+    "type": "MIT"
+  }]
+}
