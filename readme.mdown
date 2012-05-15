@@ -8,6 +8,38 @@ This makes pocket-watch great for comparing the *relative performance* of two or
 more procedures, but not very well suited for establishing their raw ops/s
 speed.
 
+## Usage
+
+```coffee-script
+bench = require 'pocket-watch'
+
+# create a sample array to process
+array = [0..100000]
+
+stats = bench()
+  .add 'iterate', ->
+    total = 0
+    for n in array then total += n
+    return total
+
+  .add 'reduce', ->
+    array.reduce (prev, curr) -> prev + curr
+
+  # run the suite five times, allowing each cycle to run for 500 ms
+  .run 5, 500
+
+console.log "iterate: #{stats.iterate.average}ms"
+console.log "reduce:  #{stats.reduce.average}ms"
+
+```
+
+This example will produce the following output:
+
+```
+iterate: 48.2ms
+reduce:  450.6ms
+```
+
 ## License
 
 Copyright (c) Erik Lundin
