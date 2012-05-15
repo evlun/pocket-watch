@@ -82,6 +82,46 @@ Suite.prototype.batch = function(cycles, limit) {
   return times;
 };
 
+function sum(arr) {
+  var i, total = 0;
+  for (i = 0; i < arr.length; i++) {
+    total += arr[i];
+  }
+  return total;
+}
+
+function sort(arr) {
+  var copy = arr.slice();
+  copy.sort();
+  return copy;
+}
+
+Suite.prototype.run = function(cycles, limit) {
+  var i, total, label,
+      times = this.batch(cycles, limit),
+      out = [];
+
+  for (i = 0; i < this.benchmarks.length; i++) {
+    label = this.benchmarks[i].label;
+    total = sum(times[i]);
+    sorted = sort(times[i]);
+
+    obj = {
+      'label': label,
+      'total': total,
+      'average': total / times[i].length,
+      'median': sorted[Math.floor(sorted.length / 2)],
+      'fastest': sorted[0],
+      'slowest': sorted[sorted.length - 1]
+    };
+
+    out[label] = obj;
+    out.push(obj);
+  }
+
+  return out;
+};
+
 function create() {
   return new Suite();
 }
